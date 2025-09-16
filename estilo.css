@@ -1,0 +1,78 @@
+body {
+  margin: 0;
+  font-family: "Trebuchet MS", sans-serif;
+  background: linear-gradient(180deg, #000814, #001d3d, #003566);
+  color: #e0e0e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.form-container {
+  background: rgba(0, 0, 40, 0.85);
+  padding: 30px;
+  border-radius: 12px;
+  border: 1px solid #0077b6;
+  box-shadow: 0 0 20px rgba(0,183,255,0.5);
+  text-align: center;
+  width: 320px;
+}
+
+.form-container h2 {
+  color: #00b4d8;
+  text-shadow: 0 0 8px #00b4d8;
+  margin-bottom: 20px;
+}
+
+.form-container input {
+  width: 90%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: 1px solid #00b4d8;
+  background: rgba(0,0,50,0.8);
+  color: #caf0f8;
+}
+
+.form-container button {
+  background: #00b4d8;
+  color: #001d3d;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.2s ease;
+}
+
+.form-container button:hover {
+  background: #0096c7;
+  box-shadow: 0 0 12px #00b4d8;
+}
+
+.mensaje-exito, .mensaje-error {
+  background: rgba(0, 0, 40, 0.9);
+  border: 1px solid #0077b6;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  width: 300px;
+  margin: 100px auto;
+  color: #caf0f8;
+  box-shadow: 0 0 15px rgba(0,183,255,0.6);
+}
+.mensaje-exito {
+  color: #90ee90;
+}
+.mensaje-error {
+  color: #ff6961;
+}
+a {
+  color: #00b4d8;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+

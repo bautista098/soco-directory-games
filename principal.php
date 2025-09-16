@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catálogo de Juegos - PS2 Style</title>
+  <title>Socogames catalogo de juegos</title>
   <style>
     body {
       margin: 0;
@@ -165,11 +165,13 @@
         <p><strong>Género:</strong> Acción / Mundo abierto</p>
         <p><strong>Empresa:</strong> Rockstar Games</p>
         <p><strong>Año:</strong> 2004</p>
+        <p><strong>Consola</strong> PS2</p>
       </div>
       <div class="long-story">
         CJ regresa a Los Santos tras la muerte de su madre, y se ve envuelto en guerras de pandillas, corrupción policial y traiciones. 
         El juego ofrece un enorme mundo abierto con misiones variadas, personalización de personajes, vehículos y territorios.
       </div>
+      
     </div>
 
     <!-- Aventura -->
