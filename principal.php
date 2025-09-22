@@ -144,7 +144,7 @@
 <body>
   <header>
     <h1>Catálogo de Juegos - PS2</h1>
-    <p>Género • Historia • Empresa • Año</p>
+    <p></p>
 
     <nav>
       <button onclick="filtrar('all')">Todos</button>
@@ -165,7 +165,7 @@
         <p><strong>Género:</strong> Acción / Mundo abierto</p>
         <p><strong>Empresa:</strong> Rockstar Games</p>
         <p><strong>Año:</strong> 2004</p>
-        <p><strong>Consola</strong> PS2</p>
+        <p><strong>Consola:</strong> PS2</p>
       </div>
       <div class="long-story">
         CJ regresa a Los Santos tras la muerte de su madre, y se ve envuelto en guerras de pandillas, corrupción policial y traiciones. 
@@ -176,12 +176,14 @@
 
     <!-- Aventura -->
     <div class="game-card" data-categoria="aventura" onclick="expandir(this)">
-      <img src="https://via.placeholder.com/130" alt="Shadow of the Colossus">
+      <img src="Shadows.webp" alt="Shadow of the Colossus">
       <div class="info">
         <h2>Shadow of the Colossus</h2>
         <p><strong>Género:</strong> Aventura / Acción</p>
         <p><strong>Empresa:</strong> Team ICO</p>
         <p><strong>Año:</strong> 2005</p>
+        <p><strong>Consola:</strong> PS2</p>
+        
       </div>
       <div class="long-story">
         Wander debe derrotar a 16 colosos para traer de vuelta a la vida a una joven. 
@@ -191,12 +193,13 @@
 
     <!-- RPG -->
     <div class="game-card" data-categoria="rpg" onclick="expandir(this)">
-      <img src="https://via.placeholder.com/130" alt="Final Fantasy X">
+      <img src="final.jpeg" alt="Final Fantasy X">
       <div class="info">
         <h2>Final Fantasy X</h2>
         <p><strong>Género:</strong> RPG</p>
         <p><strong>Empresa:</strong> Square Enix</p>
         <p><strong>Año:</strong> 2001</p>
+        <p><strong>Consola:</strong> PS2</p>
       </div>
       <div class="long-story">
         Tidus, un joven jugador de blitzball, se une a Yuna en un viaje para derrotar a "Sin", una criatura que aterroriza al mundo. 
@@ -206,12 +209,13 @@
 
     <!-- Deportes -->
     <div class="game-card" data-categoria="deportes" onclick="expandir(this)">
-      <img src="https://via.placeholder.com/130" alt="PES 6">
+      <img src="PES.jpeg" alt="PES 6">
       <div class="info">
         <h2>Pro Evolution Soccer 6</h2>
         <p><strong>Género:</strong> Deportes / Fútbol</p>
         <p><strong>Empresa:</strong> Konami</p>
         <p><strong>Año:</strong> 2006</p>
+        <p><strong>Consola:</strong> PS2</p>
       </div>
       <div class="long-story">
         PES 6 marcó una época en el fútbol virtual con su jugabilidad fluida, ligas legendarias y memorable banda sonora. 
@@ -221,12 +225,13 @@
 
     <!-- Carreras -->
     <div class="game-card" data-categoria="carreras" onclick="expandir(this)">
-      <img src="https://via.placeholder.com/130" alt="NFS Underground 2">
+      <img src="NFS.jpeg" alt="NFS Underground 2">
       <div class="info">
         <h2>Need for Speed: Underground 2</h2>
         <p><strong>Género:</strong> Carreras</p>
         <p><strong>Empresa:</strong> Electronic Arts</p>
         <p><strong>Año:</strong> 2004</p>
+        <p><strong>Consola:</strong> PS2</p>
       </div>
       <div class="long-story">
         Underground 2 revolucionó las carreras callejeras con personalización extrema, mundo abierto nocturno y una icónica banda sonora. 
@@ -236,7 +241,7 @@
   </div>
 
   <footer>
-    <p>© 2025 Mi Catálogo PS2 Style</p>
+    <p></p>
   </footer>
 
   <script>

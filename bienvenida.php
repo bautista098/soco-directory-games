@@ -1,11 +1,25 @@
 <?php
 session_start();
-if (!isset($_SESSION["usuario"])) {
-    header("Location: principal.php");
+if (!isset($_SESSION['usuario'])) {
+    header("Location: login.php");
     exit;
 }
 ?>
-<h2>Bienvenido <?php echo $_SESSION["usuario"]; ?> 🎮</h2>
-<a href="logout.php">Cerrar sesión</a>
-<a href="principal.php">ir a pagina principal</a>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Bienvenida - Socogames</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<div class="mensaje-exito">
+    <h2>¡Bienvenido, <?php echo $_SESSION['usuario']; ?>! 🎮</h2>
+    <p>Has iniciado sesión correctamente en Socogames.</p>
+    <a href="principal.php">Ir a la pagina principal</a>
+    
+</div>
+</body>
+</html>
 

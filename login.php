@@ -1,32 +1,53 @@
 <?php
-include "conexion.php";
 session_start();
+include("conexion.php");
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $usuario = $_POST["usuario"];
-    $clave   = $_POST["clave"];
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $usuario = trim($_POST['usuario']);
+    $pass    = $_POST['password'];
 
-    $sql = "SELECT * FROM usuarios WHERE username='$usuario' OR email='$usuario'";
-    $result = $conn->query($sql);
+    $sql = "SELECT * FROM usuarios WHERE username=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $usuario);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    if ($result->num_rows == 1) {
-        $user = $result->fetch_assoc();
-        if (password_verify($clave, $user["password"])) {
-            $_SESSION["usuario"] = $user["username"];
+    if ($row = $result->fetch_assoc()) {
+        if (password_verify($pass, $row['password'])) {
+            $_SESSION['usuario'] = $row['username'];
             header("Location: bienvenida.php");
             exit;
         } else {
-            echo "❌ Contraseña incorrecta";
+            $error = "Contraseña incorrecta.";
         }
     } else {
-        echo "❌ Usuario no encontrado";
+        $error = "Usuario no encontrado.";
     }
 }
 ?>
 
-<form method="post">
-  Usuario o Email: <input type="text" name="usuario"><br>
-  Contraseña: <input type="password" name="clave"><br>
-  <input type="submit" value="Ingresar">
-</form>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar sesión - Socogames</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<div class="form-container">
+    <h2>Iniciar sesión</h2>
+    <?php 
+    if (isset($_GET['msg']) && $_GET['msg'] === 'registrado') 
+        echo "<p class='mensaje-exito'>Registro exitoso. Ahora inicia sesión.</p>";
+    if (isset($error)) echo "<p class='mensaje-error'>$error</p>"; 
+    ?>
+    <form method="POST">
+        <input type="text" name="usuario" placeholder="Usuario" required><br>
+        <input type="password" name="password" placeholder="Contraseña" required><br>
+        <button type="submit">Entrar</button>
+    </form>
+    <p>¿No tienes cuenta? <a href="registro.php">Regístrate aquí</a></p>
+</div>
+</body>
+</html>
 

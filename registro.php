@@ -1,24 +1,43 @@
 <?php
-include "conexion.php";
+include("conexion.php");
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $usuario = $_POST["usuario"];
-    $email   = $_POST["email"];
-    $clave   = password_hash($_POST["clave"], PASSWORD_DEFAULT);
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $usuario = trim($_POST['usuario']);
+    $email   = trim($_POST['email']);
+    $pass    = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
-    $sql = "INSERT INTO usuarios (username, password, email) VALUES ('$usuario', '$clave', '$email')";
-    if ($conn->query($sql) === TRUE) {
-        echo "✅ Usuario registrado. <a href='login.php'>Iniciar sesión</a>";
+    $sql = "INSERT INTO usuarios (username, email, password) VALUES (?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sss", $usuario, $email, $pass);
+
+    if ($stmt->execute()) {
+        header("Location: login.php?msg=registrado");
+        exit;
     } else {
-        echo "❌ Error: " . $conn->error;
+        $error = "Error: " . $stmt->error;
     }
 }
 ?>
 
-<form method="post">
-  Usuario: <input type="text" name="usuario"><br>
-  Email: <input type="email" name="email"><br>
-  Contraseña: <input type="password" name="clave"><br>
-  <input type="submit" value="Registrar">
-</form>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro - Socogames</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<div class="form-container">
+    <h2>Registro</h2>
+    <?php if (isset($error)) echo "<p class='mensaje-error'>$error</p>"; ?>
+    <form method="POST">
+        <input type="text" name="usuario" placeholder="Usuario" required><br>
+        <input type="email" name="email" placeholder="Correo electrónico" required><br>
+        <input type="password" name="password" placeholder="Contraseña" required><br>
+        <button type="submit">Registrarse</button>
+    </form>
+    <p>¿Ya tienes cuenta? <a href="login.php">Inicia sesión aquí</a></p>
+</div>
+</body>
+</html>
 
