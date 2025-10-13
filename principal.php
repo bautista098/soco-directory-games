@@ -1,3 +1,13 @@
+<?php
+// principal.php - Versión adaptada con menú de usuario integrado y botones mejorados.
+// Inicia sesión PHP al inicio para manejar el estado del usuario.
+// Mejoras en botones: Iconos Unicode, transiciones suaves, dropdown con toggle JS (mejor para móviles), estados active, y mayor responsividad.
+
+session_start(); // Inicia la sesión si no está iniciada
+$userLoggedIn = isset($_SESSION['user']); // Verifica si hay usuario logueado (ejemplo: $_SESSION['user'] = 'nombre_usuario')
+$currentUser   = $userLoggedIn ? $_SESSION['user'] : null;
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -50,14 +60,35 @@
       cursor: pointer;
       text-transform: uppercase;
       letter-spacing: 1px;
-      transition: all 0.2s ease;
+      transition: all 0.3s ease; /* Mejora: Transición más suave */
       box-shadow: 0 0 6px rgba(0,183,255,0.4);
+      position: relative;
+      overflow: hidden;
+    }
+    nav button::before { /* Mejora: Efecto ripple sutil en hover */
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
     }
     nav button:hover {
       background: #00b4d8;
       color: #001d3d;
       box-shadow: 0 0 12px #00b4d8, 0 0 20px #0096c7;
-      transform: scale(1.05);
+      transform: scale(1.05) translateY(-2px); /* Mejora: Elevación sutil */
+    }
+    nav button:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+    nav button:active {
+      transform: scale(0.98); /* Mejora: Feedback táctil */
     }
 
     .container {
@@ -139,6 +170,172 @@
       position: relative;
       z-index: 10;
     }
+
+    /* CSS mejorado para el menú de usuario - Integra con el estilo existente */
+    .user-section {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 11;
+    }
+    .user-info {
+      color: #90e0ef;
+      font-size: 14px;
+      text-shadow: 0 0 4px #00b4d8;
+      white-space: nowrap; /* Mejora: Evita quiebre de línea */
+    }
+    .user-menu {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+    .user-menu button {
+      background: rgba(0, 0, 50, 0.9);
+      border: 1px solid #00b4d8;
+      color: #caf0f8;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease; /* Mejora: Transición más suave */
+      box-shadow: 0 0 4px rgba(0,183,255,0.4);
+      font-family: "Trebuchet MS", sans-serif;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      gap: 4px; /* Espacio para iconos */
+      min-width: 100px; /* Mejora: Tamaño consistente */
+    }
+    .user-menu button::before { /* Mejora: Efecto ripple similar a nav */
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+    .user-menu button:hover {
+      background: #00b4d8;
+      color: #001d3d;
+      box-shadow: 0 0 8px #00b4d8, 0 0 12px #0096c7;
+      transform: scale(1.03) translateY(-1px); /* Mejora: Elevación sutil */
+    }
+    .user-menu button:hover::before {
+      width: 200px;
+      height: 200px;
+    }
+    .user-menu button:active {
+      transform: scale(0.97); /* Mejora: Feedback táctil */
+    }
+    .login-register {
+      display: flex;
+      gap: 5px;
+    }
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown-btn {
+      background: rgba(0, 0, 50, 0.9) !important; /* Mejora: Estilo específico para botón dropdown */
+      border: 1px solid #00b4d8 !important;
+      padding: 8px 12px !important;
+      min-width: auto !important;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background: rgba(0, 0, 50, 0.95);
+      min-width: 140px; /* Mejora: Ancho ligeramente mayor para iconos */
+      box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+      border: 1px solid #00b4d8;
+      border-radius: 6px;
+      z-index: 12;
+      top: 100%;
+      margin-top: 5px;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 0.3s ease, transform 0.3s ease; /* Mejora: Animación suave de entrada */
+    }
+    .dropdown-content.show {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .dropdown-content button {
+      color: #caf0f8;
+      padding: 12px 15px; /* Mejora: Más padding para mejor toque */
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px; /* Espacio para iconos */
+      width: 100%;
+      border: none;
+      background: none;
+      text-align: left;
+      cursor: pointer;
+      transition: background 0.2s ease, padding-left 0.2s ease;
+      font-family: "Trebuchet MS", sans-serif;
+      font-size: 12px;
+      border-bottom: 1px solid rgba(0, 180, 216, 0.1); /* Mejora: Separadores sutiles */
+    }
+    .dropdown-content button:last-child {
+      border-bottom: none;
+    }
+    .dropdown-content button:hover {
+      background: rgba(0, 180, 216, 0.3); /* Mejora: Hover más visible */
+      color: #00b4d8;
+      padding-left: 20px; /* Mejora: Efecto slide-in */
+    }
+    /* Iconos Unicode para botones (mejora visual sin dependencias externas) */
+    .icon-user { content: '👤'; } /* Para bienvenido o perfil */
+    .icon-menu { content: '☰'; } /* Para botón menú */
+    .icon-profile { content: '👤'; }
+    .icon-settings { content: '⚙️'; }
+    .icon-logout { content: '🚪'; }
+    .icon-login { content: '🔑'; }
+    .icon-register { content: '📝'; }
+    /* Agregar iconos vía ::before en botones específicos */
+    .dropdown-btn::before { content: '☰ '; } /* Icono menú */
+    .login-btn::before { content: '🔑 '; }
+    .register-btn::before { content: '📝 '; }
+    .profile-btn::before { content: '👤 '; }
+    .settings-btn::before { content: '⚙️ '; }
+    .logout-btn::before { content: '🚪 '; }
+    @media (max-width: 768px) {
+      .user-section {
+        top: 10px;
+        right: 10px;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 8px;
+      }
+      .user-menu {
+        justify-content: center;
+        width: 100%;
+      }
+      .user-menu button {
+        min-width: 120px; /* Mejora: Botones más anchos en móvil para toque fácil */
+        padding: 10px 14px;
+      }
+      .dropdown-content {
+        min-width: 160px;
+        right: -20px; /* Ajuste para no salirse de pantalla */
+      }
+      nav {
+        margin-top: 60px; /* Mejora: Más espacio para menú en móviles */
+      }
+    }
   </style>
 </head>
 <body>
@@ -146,6 +343,26 @@
     <h1>Catálogo de Juegos - PS2</h1>
     <p></p>
 
+    <!-- Menú de usuario agregado aquí - Posicionado en la esquina superior derecha -->
+    <div class="user-section">
+      <?php if ($userLoggedIn): ?>
+        <span class="user-info">Bienvenido, <?php echo htmlspecialchars($currentUser ); ?>! 👤</span>
+        <div class="dropdown" id="userDropdown">
+          <button class="user-menu-btn dropdown-btn" onclick="toggleDropdown()">Menú</button>
+          <div class="dropdown-content">
+            <button class="profile-btn" onclick="window.location.href='perfil.php'">Perfil</button>
+            <button class="settings-btn" onclick="window.location.href='configuracion.php'">Configuración</button>
+            <button class="logout-btn" onclick="logout()">Cerrar Sesión</button>
+          </div>
+        </div>
+      <?php else: ?>
+        <div class="login-register user-menu">
+          <button class="user-menu-btn login-btn" onclick="window.location.href='login.php'">Iniciar Sesión</button>
+          <button class="user-menu-btn register-btn" onclick="window.location.href='register.php'">Registrarse</button>
+        </div>
+      <?php endif; ?>
+    </div>
+    
     <nav>
       <button onclick="filtrar('all')">Todos</button>
       <button onclick="filtrar('accion')">Acción</button>
@@ -214,57 +431,4 @@
         <h2>Pro Evolution Soccer 6</h2>
         <p><strong>Género:</strong> Deportes / Fútbol</p>
         <p><strong>Empresa:</strong> Konami</p>
-        <p><strong>Año:</strong> 2006</p>
-        <p><strong>Consola:</strong> PS2</p>
-      </div>
-      <div class="long-story">
-        PES 6 marcó una época en el fútbol virtual con su jugabilidad fluida, ligas legendarias y memorable banda sonora. 
-        Fue el clásico infaltable en reuniones con amigos en la era PS2.
-      </div>
-    </div>
-
-    <!-- Carreras -->
-    <div class="game-card" data-categoria="carreras" onclick="expandir(this)">
-      <img src="NFS.jpeg" alt="NFS Underground 2">
-      <div class="info">
-        <h2>Need for Speed: Underground 2</h2>
-        <p><strong>Género:</strong> Carreras</p>
-        <p><strong>Empresa:</strong> Electronic Arts</p>
-        <p><strong>Año:</strong> 2004</p>
-        <p><strong>Consola:</strong> PS2</p>
-      </div>
-      <div class="long-story">
-        Underground 2 revolucionó las carreras callejeras con personalización extrema, mundo abierto nocturno y una icónica banda sonora. 
-        Fue uno de los títulos de velocidad más jugados en la PS2.
-      </div>
-    </div>
-  </div>
-
-  <footer>
-    <p></p>
-  </footer>
-
-  <script>
-    function filtrar(categoria) {
-      const juegos = document.querySelectorAll(".game-card");
-      juegos.forEach(juego => {
-        if (categoria === "all" || juego.dataset.categoria === categoria) {
-          juego.style.display = "flex";
-        } else {
-          juego.style.display = "none";
-        }
-      });
-    }
-
-    function expandir(card) {
-      // Cierra los demás
-      document.querySelectorAll(".game-card.expanded").forEach(c => {
-        if (c !== card) c.classList.remove("expanded");
-      });
-
-      // Alterna expansión
-      card.classList.toggle("expanded");
-    }
-  </script>
-</body>
-</html>
+        <p

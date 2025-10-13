@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <h2>Iniciar sesión</h2>
     <?php 
     if (isset($_GET['msg']) && $_GET['msg'] === 'registrado') 
-        echo "<p class='mensaje-exito'>Registro exitoso. Ahora inicia sesión.</p>";
+        echo "<p class='mensaje-exito'></p>";
     if (isset($error)) echo "<p class='mensaje-error'>$error</p>"; 
     ?>
     <form method="POST">
